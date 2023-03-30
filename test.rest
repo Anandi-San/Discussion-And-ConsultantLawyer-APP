@@ -1,0 +1,23 @@
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "123456"
+}
+
+###
+DELETE  http://localhost:5000/logout
+
+###
+GET http://localhost:5000/discusiion/2
+
+
+###
+POST http://localhost:5000/discussion
+Content-Type: application/json
+
+{
+    "title": "UU ITE",
+    "content": "Undang Undang tentang teknologi"
+}
