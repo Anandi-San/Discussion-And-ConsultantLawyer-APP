@@ -1,27 +1,27 @@
 import {Op} from "sequelize";
 import Discussion from "../models/DiscussionModel.js";
-import Users from "../models/UserModel.js";
+import User from "../models/UserModel.js";
 
 export const getDiscussion = async (req , res) => {
     try {
         let response;
         if(req.role === "admin"){
             response = await Discussion.findAll({
-                // attributes:['uuid','title','content'],
+                attributes:['uuid','title','content'],
                 include:[{
-                    model: Users, 
-                    // attributes: ['title','content']
+                    model: User, 
+                    attributes: ['name','email']
                 }]
             });
         }else{
             response = await Discussion.findAll({
-                // attributes:['uuid','title','content'],
+                attributes:['uuid','title','content'],
                 where:{
                     userId: req.userId
                 },
                 include:[{
-                    model: Users,
-                    // attributes:['title','content']
+                    model: User,
+                    attributes:['name','email']
                 }]
             });
         }
@@ -47,7 +47,7 @@ export const getDiscussionById = async (req , res) => {
                     id: discussion.id
                 },
                 include:[{
-                    model: Users,
+                    model: User,
                     attributes:['name','email']
                 }]
             });
@@ -58,7 +58,7 @@ export const getDiscussionById = async (req , res) => {
                     [Op.and]:[{id: discussion.id}, {userId: req.userId}]
                 },
                 include:[{
-                    model: Users,
+                    model: User,
                     attributes:['name','email']
                 }]
             });
@@ -121,11 +121,10 @@ export const deleteDiscussion = async (req , res) => {
             }
         });
         if(!discussion) return res.status(404).json({msg: "Data tidak ditemukan"});
-        const {title, content} = req.body;
         if(req.role === "admin"){
             await Discussion.destroy({
                 where:{
-                    id: product.id
+                    id: discussion.id
                 }
             });
         }else{

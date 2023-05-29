@@ -17,20 +17,15 @@ GET http://localhost:5000/discusiion/62e20743-8925-4d6f-b144-a1d10953b196
 GET http://localhost:5000/discussion
 
 
+
 ###
 POST http://localhost:5000/discussion
 Content-Type: application/json
 
 {
-    "title": "UU ITE",
-    "content": "Undang Undang tentang teknologi"
+    "title": "dpr",
+    "content": "gmna sih anggota dpr"
 }
 
 ###
-PATCH  http://localhost:5000/discussion/62e20743-8925-4d6f-b144-a1d10953b196
-Content-Type: application/json
-
-{
-    "title": "UU Informasi dan transaksi Elektronik",
-    "content": "Undang Undang tentang teknologi"
-}
+DELETE  http://localhost:5000/discussion/62e20743-8925-4d6f-b144-a1d10953b196
